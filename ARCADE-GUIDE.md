@@ -1,0 +1,1 @@
+Luxe 6.1: Arcade Universe now links to Vampire Hunter: Nightfall (2D shooter with three missions) and Castle Hunt 3D (retro raycasting maze). The old action games file remains in the ZIP for compatibility, but is no longer linked in the Games Hub. Upload ALL files to GitHub Pages. Progress/high scores use local browser storage. No AI connection required.

@@ -1,0 +1,1 @@
+Luxe 6.7: First-visit 20-second cinematic animated welcome, no skip. Uses localStorage key riley-fantasy-intro-v67-seen. This is an HTML/CSS animation, not an MP4 video. Runs once per browser profile until site storage is cleared. Existing AI limits still apply; unlimited creativity is a slogan, not a guarantee of unlimited AI requests. Upload all files to GitHub Pages.

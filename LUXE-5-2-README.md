@@ -1,0 +1,1 @@
+Luxe 5.2: fixed full theme palette, additional reading/comfort settings, JSON export and restore. Upload index.html and original images to GitHub. Existing localStorage key preserved. Export a backup before upgrading. Cloudflare Worker unchanged.
