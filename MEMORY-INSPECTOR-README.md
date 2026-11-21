@@ -1,0 +1,1 @@
+Advanced AI Memory fix: reads relationPeople and resolves relationship aId/bId; reads storyTimelines; adds Settings > Inspect saved AI memory. No account or Supabase required. Inspector only previews local context, not backend processing. Test on GitHub Pages; keep a backup of local creations.
