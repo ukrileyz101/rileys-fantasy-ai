@@ -1,0 +1,1 @@
+Advanced Story Timeline: create multiple timelines, add/edit/delete events, order events, attach compressed images, duplicate timelines. Existing timeline events are copied into the first new timeline. Data is saved locally in riley-creative-studio-v1 and included in Creative Studio backups. Open index.html and navigate to Creative Studio > Story Timeline. Not cloud-synced.

@@ -1,0 +1,1 @@
+Advanced Writing Challenges: daily word goals, 7-day progress chart, writing streaks, manual word count, custom challenges, achievement badges, and 25-minute focus timer. Saved locally in browser; not yet synced to accounts. Focus timer requires page to remain open.

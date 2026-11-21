@@ -1,0 +1,1 @@
+LUXE 10.0 Relationship Builder testing upgrade. Open index.html > Creative Studio > Relationship Builder. Add characters, upload portraits, drag nodes, connect pairs, edit and delete. Data saves in browser storage; use Creative Studio backup. Online accounts and sync not yet implemented. Browser testing required.
