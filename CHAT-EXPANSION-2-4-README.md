@@ -1,0 +1,1 @@
+Fix: chat view no longer clips the input below the viewport; composer remains visible at bottom while reading long AI replies. All local browser data remains untouched. Deploy extracted files to GitHub Pages.

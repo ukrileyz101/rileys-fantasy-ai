@@ -1,0 +1,1 @@
+Chat Layout 2.6: viewport-bound chat panel; transcript scrolls independently and composer is always visible as a flex child on desktop/mobile. Local browser data unchanged.

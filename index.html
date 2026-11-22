@@ -366,6 +366,77 @@ html.intro-seen #l53Intro{display:none!important}
 #chat.active.chat-expanded .chat-head{padding:7px 12px!important}
 #chat.active.chat-expanded .riley-memory-pickers{margin:3px 0!important}
 @media(max-width:680px){#chat.active .chat-layout{max-width:100%!important;padding:8px!important}#chat.active #chatlog{min-height:50dvh!important}#chat.active .riley-chat-toolbar button{flex:1}}
+
+/* LUXE 10.0 Chat Expansion 2.4 — restore reachable message composer */
+#chat.view.active{height:auto!important;min-height:calc(100dvh - 62px)!important;overflow:visible!important}
+#chat.active .chat-layout{height:auto!important;min-height:calc(100dvh - 90px)!important;overflow:visible!important;padding-bottom:110px!important}
+#chat.active #chatlog{height:auto!important;min-height:clamp(300px,45dvh,680px)!important;max-height:none!important;overflow:visible!important}
+#chat.active #chatForm.composer{position:sticky!important;bottom:8px!important;z-index:25!important;background:#20132f!important;border:1px solid #6c438e!important;border-radius:16px!important;padding:9px!important;box-shadow:0 8px 32px #0009!important;margin-top:14px!important}
+#chat.active #chatForm.composer textarea{min-height:54px!important;max-height:140px!important}
+@media(max-width:700px){#chat.active .chat-layout{padding-bottom:100px!important}#chat.active #chatForm.composer{bottom:4px!important}}
+</style>
+<style id="riley-chat-layout-2-5">
+/* Keep the message composer visible while the conversation takes the remaining space. */
+#chat.view.active .chat-layout{box-sizing:border-box!important}
+#chat.view.active #chatForm.composer{display:flex!important;visibility:visible!important}
+@media(min-width:701px){
+ #chat.view.active .chat-layout{min-height:calc(100dvh - 70px)!important;padding-bottom:105px!important}
+ #chat.view.active #chatForm.composer{position:fixed!important;bottom:12px!important;left:calc(220px + (100vw - 220px - min(100vw - 250px, 1350px))/2)!important;width:min(calc(100vw - 250px),1350px)!important;margin:0!important;z-index:500!important}
+ #chat.view.active #chatlog{min-height:clamp(430px,65dvh,950px)!important}
+}
+@media(max-width:700px){
+ body.riley-in-chat #chat.view.active{position:fixed!important;inset:0!important;height:100dvh!important;min-height:0!important;max-height:100dvh!important;overflow:hidden!important;z-index:9999!important}
+ body.riley-in-chat #chat.view.active .chat-layout{height:100dvh!important;min-height:0!important;max-height:100dvh!important;overflow:hidden!important;padding:8px 9px calc(90px + env(safe-area-inset-bottom))!important;display:flex!important;flex-direction:column!important;gap:6px!important}
+ body.riley-in-chat #chat .l5-chat-actions,body.riley-in-chat #chat .chat-head,body.riley-in-chat #chat .riley-chat-toolbar,body.riley-in-chat #chat .riley-memory-pickers{flex:0 0 auto!important}
+ body.riley-in-chat #chat .luxe-chat-kicker,body.riley-in-chat #chat .l6-chat-tip{display:none!important}
+ body.riley-in-chat #chat .riley-memory-pickers{max-height:24dvh!important;overflow:auto!important}
+ body.riley-in-chat #chat #chatlog{flex:1 1 0!important;height:0!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain!important;margin:0!important;padding:12px!important}
+ body.riley-in-chat #chat #chatForm.composer{position:fixed!important;left:8px!important;right:8px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;width:auto!important;height:auto!important;min-height:0!important;margin:0!important;padding:7px!important;z-index:10010!important;display:flex!important;flex-direction:row!important;gap:7px!important;background:#261535!important;box-shadow:0 0 0 1px #8052a4,0 10px 30px #000b!important}
+ body.riley-in-chat #chat #chatForm.composer textarea{flex:1 1 auto!important;width:0!important;min-height:46px!important;height:46px!important;max-height:110px!important}
+ body.riley-in-chat #chat #chatForm.composer button{flex:0 0 72px!important;min-width:72px!important;min-height:46px!important}
+ body.riley-in-chat #chat .status{display:none!important}
+}
+</style>
+<style id="riley-chat-layout-2-6">
+/* Viewport chat: composer is a flex child, never below a growing transcript. */
+body.riley-in-chat #chat.view.active{
+ position:fixed!important;top:54px!important;right:0!important;bottom:0!important;left:190px!important;
+ height:auto!important;min-height:0!important;overflow:hidden!important;z-index:2000!important;
+ background:#0b0712!important;animation:none!important;
+}
+body.riley-in-chat #chat.view.active .chat-layout{
+ display:flex!important;flex-direction:column!important;box-sizing:border-box!important;
+ width:min(100%,1450px)!important;max-width:1450px!important;height:100%!important;max-height:100%!important;
+ min-height:0!important;margin:0 auto!important;padding:10px 14px 10px!important;gap:8px!important;
+ overflow:hidden!important;
+}
+body.riley-in-chat #chat.view.active #chatlog{
+ flex:1 1 0!important;min-height:0!important;max-height:none!important;height:auto!important;
+ overflow-y:auto!important;overflow-x:hidden!important;margin:0!important;overscroll-behavior:contain!important;
+}
+body.riley-in-chat #chat.view.active #chatForm.composer{
+ display:flex!important;position:relative!important;inset:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
+ flex:0 0 auto!important;align-self:stretch!important;width:100%!important;max-width:none!important;
+ margin:0!important;z-index:10!important;visibility:visible!important;
+ background:#261535!important;
+}
+body.riley-in-chat #chat.view.active #chatForm.composer textarea{flex:1 1 auto!important;min-width:0!important;min-height:46px!important;height:52px!important;max-height:110px!important}
+body.riley-in-chat #chat.view.active #chatForm.composer button{flex:0 0 auto!important;min-width:80px!important}
+body.riley-in-chat #chat.view.active .l5-chat-actions,
+body.riley-in-chat #chat.view.active .chat-head,
+body.riley-in-chat #chat.view.active .riley-chat-toolbar,
+body.riley-in-chat #chat.view.active .riley-memory-pickers{flex-shrink:0!important}
+body.riley-in-chat #chat.view.active .status{flex-shrink:0!important}
+@media(max-width:700px){
+ body.riley-in-chat #chat.view.active{top:0!important;left:0!important;right:0!important;bottom:0!important;height:100dvh!important}
+ body.riley-in-chat #chat.view.active .chat-layout{padding:8px 8px calc(10px + env(safe-area-inset-bottom))!important;gap:6px!important}
+ body.riley-in-chat #chat.view.active .l5-chat-actions{overflow-x:auto!important;white-space:nowrap!important;max-height:45px!important}
+ body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:23dvh!important;overflow:auto!important}
+ body.riley-in-chat #chat.view.active .chat-head{padding:7px!important}
+ body.riley-in-chat #chat.view.active #chatForm.composer{padding:6px!important}
+ body.riley-in-chat #chat.view.active #chatForm.composer textarea{height:44px!important;min-height:44px!important}
+ body.riley-in-chat #chat.view.active #chatForm.composer button{min-width:68px!important}
+}
 </style></head><body class="on-welcome"><div id="l53Intro" role="dialog" aria-label="Welcome to Riley’s Fantasy AI" aria-modal="true">
   <div class="intro-film-bg" aria-hidden="true"></div><div class="intro-film-stars" aria-hidden="true"></div>
   <div class="intro-film-shade" aria-hidden="true"></div>

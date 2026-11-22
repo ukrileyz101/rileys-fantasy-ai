@@ -1,0 +1,1 @@
+Chat Layout 2.5: fixes missing mobile composer by pinning input above bottom safe area, constrains messages to scrollable viewport, and pins desktop composer. Keeps memory selectors and prior chat data.
