@@ -1,0 +1,1 @@
+Chat Expansion 2.3: full-height natural-scrolling chat; expand-width button; collapsible timeline/world selectors. Does not alter localStorage or existing chat records. Extremely long replies still require page scrolling.
