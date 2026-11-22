@@ -1,0 +1,1 @@
+Story Timeline Memory 2.0: Choose a timeline per AI chat, read saved events in order, inspect the chosen timeline. Existing chats and Creative Studio data are preserved in browser storage. Create a timeline in Creative Studio > Story Timeline first. Cloudflare AI still requires a working backend.
