@@ -1,0 +1,1 @@
+World Memory 2.2: story timeline and world selectors side-by-side in one compact panel, larger chat conversation viewport, and visible Save Map button above map canvas. Existing browser data and AI integrations unchanged.
