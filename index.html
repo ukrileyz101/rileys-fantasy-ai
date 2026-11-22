@@ -468,6 +468,19 @@ html body.riley-in-chat #chat.view.active .chat-layout{padding-bottom:108px!impo
   min-height:42px!important;padding:6px!important;font-size:14px!important;
  }
 }
+</style><style id="riley-chat-roomier-3-6">
+/* Conservative viewport gain; composer positioning and chat behavior unchanged. */
+@media(min-width:701px){
+ html body.riley-in-chat #chat.view.active{top:65px!important;bottom:88px!important}
+ html body.riley-in-chat #chat.view.active .chat-layout{gap:5px!important;padding-top:5px!important;padding-bottom:5px!important}
+}
+@media(max-width:700px){
+ html body.riley-in-chat #chat.view.active{inset:0 0 calc(78px + env(safe-area-inset-bottom)) 0!important}
+ html body.riley-in-chat #chat.view.active .chat-layout{gap:4px!important;padding-top:4px!important;padding-bottom:3px!important}
+ html body.riley-in-chat #chat.view.active .chat-head{padding:6px 8px!important}
+ html body.riley-in-chat #chat.view.active .riley-chat-toolbar{margin:0!important}
+ html body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:19dvh!important}
+}
 </style></head><body class="on-welcome"><div id="l53Intro" role="dialog" aria-label="Welcome to Riley’s Fantasy AI" aria-modal="true">
   <div class="intro-film-bg" aria-hidden="true"></div><div class="intro-film-stars" aria-hidden="true"></div>
   <div class="intro-film-shade" aria-hidden="true"></div>
@@ -1239,4 +1252,34 @@ html body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:26vh!
  new MutationObserver(compactOnFirstVisit).observe(chat,{attributes:true,attributeFilter:['class']});
  compactOnFirstVisit();
 })();
-</script></body></html>
+</script><style id="riley-compact-chat-3-7">
+/* Only tighten chat chrome; keep the 3.6 viewport and fixed composer logic intact. */
+html body.riley-in-chat #chat.view.active .chat-layout{gap:4px!important;padding-top:4px!important;padding-bottom:4px!important}
+html body.riley-in-chat #chat.view.active .l5-chat-actions{min-height:0!important;padding:0!important;gap:5px!important}
+html body.riley-in-chat #chat.view.active .l5-chat-actions button{padding:6px 9px!important;font-size:12px!important;line-height:1.2!important}
+html body.riley-in-chat #chat.view.active .luxe-chat-kicker,
+html body.riley-in-chat #chat.view.active .l6-chat-tip{display:none!important}
+html body.riley-in-chat #chat.view.active .chat-head{min-height:0!important;padding:5px 9px!important;gap:8px!important;margin:0!important}
+html body.riley-in-chat #chat.view.active .chat-head .avatar,
+html body.riley-in-chat #chat.view.active .chat-head img{width:36px!important;height:36px!important;flex:0 0 36px!important}
+html body.riley-in-chat #chat.view.active .chat-head h2{font-size:15px!important;line-height:1.2!important;margin:0!important}
+html body.riley-in-chat #chat.view.active .chat-head .muted{font-size:11px!important;line-height:1.2!important;margin:2px 0 0!important}
+html body.riley-in-chat #chat.view.active .chat-head .back{padding:6px 9px!important}
+html body.riley-in-chat #chat.view.active .riley-chat-toolbar{margin:1px 0!important;gap:5px!important}
+html body.riley-in-chat #chat.view.active .riley-chat-toolbar button{padding:5px 9px!important;font-size:12px!important;line-height:1.2!important}
+html body.riley-in-chat #chat.view.active .riley-memory-pickers{padding:7px 9px!important;margin:0!important;gap:8px!important;max-height:22vh!important}
+html body.riley-in-chat #chat.view.active .riley-memory-field{gap:3px!important;margin:0!important}
+html body.riley-in-chat #chat.view.active .riley-memory-field label{font-size:11px!important;margin:0 0 3px!important;line-height:1.15!important}
+html body.riley-in-chat #chat.view.active .riley-memory-field select{min-height:32px!important;height:32px!important;padding:4px 9px!important;font-size:12px!important}
+html body.riley-in-chat #chat.view.active .riley-memory-field small{display:none!important}
+html body.riley-in-chat #chat.view.active #chatlog.chatlog{min-height:0!important;flex:1 1 0%!important;height:0!important;overflow-y:auto!important;padding:12px!important}
+@media(max-width:700px){
+ html body.riley-in-chat #chat.view.active .chat-layout{gap:4px!important;padding:4px 7px!important}
+ html body.riley-in-chat #chat.view.active .chat-head{padding:5px 7px!important}
+ html body.riley-in-chat #chat.view.active .chat-head .avatar,
+ html body.riley-in-chat #chat.view.active .chat-head img{width:34px!important;height:34px!important;flex-basis:34px!important}
+ html body.riley-in-chat #chat.view.active .chat-head h2{font-size:14px!important}
+ html body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:20dvh!important;padding:6px!important}
+ html body.riley-in-chat #chat.view.active .riley-chat-toolbar button{padding:6px 8px!important}
+}
+</style></body></html>
