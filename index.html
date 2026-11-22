@@ -451,7 +451,20 @@ function rileyInspectMemory(){
 
 document.getElementById('rileyInspectBtn')?.addEventListener('click',rileyInspectMemory);
 function rileyTimelinePicker(){
- const picker=function rileyWorldPicker(){
+ const picker=document.getElementById('rileyChatTimeline');if(!picker)return;
+ const d=rileyMemoryData();const chat=(db.chats||[]).find(x=>x.id===current);
+ picker.replaceChildren();const option=(id,label)=>{const o=document.createElement('option');o.value=id;o.textContent=label;picker.append(o)};
+ option('','Use Creative Studio active timeline');
+ d.timelines.forEach(t=>option(t.id,t.name+' ('+(t.events||[]).length+' events)'));
+ if(chat)picker.value=chat.timelineId||'';
+ const hint=document.getElementById('rileyTimelineHint');
+ if(hint)hint.textContent=d.timelines.length?'Choose which story this chat remembers. Changes save automatically.':'No timelines yet. Open Creative Studio → Story Timeline and add an event.';
+}
+document.getElementById('rileyChatTimeline')?.addEventListener('change',e=>{
+ const c=(db.chats||[]).find(x=>x.id===current);if(!c)return;
+ c.timelineId=e.target.value;save();rileyTimelinePicker();
+});
+function rileyWorldPicker(){
  const picker=document.getElementById('rileyChatWorld');if(!picker)return;
  const d=rileyMemoryData();const chat=(db.chats||[]).find(x=>x.id===current);
  picker.replaceChildren();const add=(id,name)=>{const o=document.createElement('option');o.value=id;o.textContent=name;picker.append(o)};
@@ -464,21 +477,6 @@ function rileyTimelinePicker(){
 document.getElementById('rileyChatWorld')?.addEventListener('change',function(){
  const c=(db.chats||[]).find(x=>x.id===current);if(!c)return;c.worldId=this.value;save();rileyWorldPicker();
 });
-document.getElementById('rileyChatTimeline');if(!picker)return;
- const d=rileyMemoryData();const chat=(db.chats||[]).find(x=>x.id===current);
- picker.replaceChildren();
- const option=(id,label)=>{const o=document.createElement('option');o.value=id;o.textContent=label;picker.append(o)};
- option('','Use Creative Studio active timeline');
- d.timelines.forEach(t=>option(t.id,t.name+' ('+(t.events||[]).length+' events)'));
- if(chat)picker.value=chat.timelineId||'';
- const hint=document.getElementById('rileyTimelineHint');
- if(hint)hint.textContent=d.timelines.length?'Choose which story this chat remembers. Changes save automatically.':'No timelines yet. Open Creative Studio → Story Timeline and add an event.';
-}
-document.getElementById('rileyChatTimeline')?.addEventListener('change',e=>{
- const c=(db.chats||[]).find(x=>x.id===current);if(!c)return;
- c.timelineId=e.target.value;save();rileyTimelinePicker();
-});
-
 
 async function reply(c){if(!db.endpoint)throw Error('Real AI is not connected. Open Settings and add your AI backend URL.');let prefs={...storyDefaults,...(c.storyPrefs||db.storyPrefs)};let instructions={humour:'Use humour and playful banter when it fits.',conflict:'Allow fictional disagreements and arguments.',toxic:'Characters may be manipulative or unpleasant within fictional drama; do not endorse abuse.',violence:'Allow non-graphic fictional fights, with no real-world instructions.',horror:'Allow fictional horror, suspense and threatening situations.',romance:'Allow consensual romantic dialogue and flirting.',sexual:'Allow only non-explicit consensual adult romantic intimacy; never sexual violence.',language:'Strong language may be used when it fits the scene.',friendship:'Supportive friendship, trust and loyalty.',family:'Family bonds and caring relationships.',betrayal:'Reveals, broken trust and hidden motives.',mystery:'Investigations, discoveries and puzzles.',adventure:'Journeys, challenges and new places.',supernatural:'Magical abilities and strange phenomena.',survival:'Fictional survival and resourcefulness.',comfort:'Gentle emotional support and check-ins.',suspense:'Tension and uncertain outcomes.',jealousy:'Non-abusive romantic or social tension.',humiliation:'Awkward misunderstandings and social mishaps.',tragedy:'Loss, grief and emotional story moments.'};let disabled=storyKeys.filter(k=>!prefs[k]);let enabled=storyKeys.filter(k=>prefs[k]).map(k=>instructions[k]);let system=`You are ${c.name} in a fictional conversation. Personality and appearance: ${c.bio||'imaginative'}. Mode: ${c.role}. Genre: ${c.genre}. Scenario: ${c.scenario||'free conversation'}. Character details: ${JSON.stringify(c.creatorDetails||{})}. Never invent the user's actions, speech, thoughts, or choices. You may control your character and background events. Reply naturally and directly to the latest message, not with repetitive questions about what happens next. Allowed themes: ${enabled.join(' ')} Avoid these themes entirely: ${disabled.join(', ')||'none'}. Respect user comfort settings, consent and provider rules. Do not produce explicit sexual content or sexual violence.`;system+=rileyMemoryContext(c);let r=await fetch((db.endpoint || window.RILEY_CONFIG?.aiBackendUrl || 'https://rileys-fantasy-ai.ukrileyz707.workers.dev/'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'system',content:system},...c.messages.slice(-24)]})});if(!r.ok)throw Error('AI service error: '+r.status);let v=await r.json();let t=v.reply||v.response||v.choices?.[0]?.message?.content||v.result?.response;if(typeof t!=='string')throw Error('Unsupported AI response');return t}
 $('chatForm').onsubmit=async e=>{e.preventDefault();let c=db.chats.find(x=>x.id===current),input=$('chatInput'),msg=input.value.trim();if(!c||!msg)return;input.value='';c.messages.push({role:'user',content:msg});bubble('user',msg);save();let btn=$('chatForm').querySelector('button');btn.disabled=true;try{if(db.endpoint&&!c.consent){if(!confirm('Send messages from this chat to your configured AI provider?'))throw Error('Message was not sent to AI.');c.consent=true;save()}let response=await reply(c);c.messages.push({role:'assistant',content:response});bubble('assistant',response);save()}catch(err){$('aiStatus').textContent='⚠ '+err.message}finally{btn.disabled=false}};
@@ -779,6 +777,16 @@ if(!data.worldMaps.length){data.worldMaps.push({id:'world-default',name:'My Fant
 let selectedId=data.activeWorldMap||data.worldMaps[0].id;
 let world=data.worldMaps.find(w=>w.id===selectedId)||data.worldMaps[0];data.activeWorldMap=world.id;
 const workspace=el('div',{class:'cs-map-v2'}), toolbar=el('div',{class:'cs-map-toolbar'});
+const saveState=el('span',{class:'cs-map-save-state',text:'✓ Saved automatically'});
+let dirty=false;
+function markDirty(){dirty=true;saveState.textContent='● Unsaved changes';}
+function confirmSaved(){dirty=false;saveState.textContent='✓ Saved on this device';}
+const saveMap=btn('💾 Save Map',()=>{
+ try{persist();const check=JSON.parse(localStorage.getItem('riley-creative-studio-v1')||'{}');
+ if(!Array.isArray(check.worldMaps)||!check.worldMaps.some(w=>w.id===world.id))throw Error('Map was not found after saving');
+ confirmSaved();}catch(err){saveState.textContent='⚠ Save failed: '+err.message;alert('Could not save map. Browser storage may be full. '+err.message)}
+},true);
+
 const picker=el('select',{'aria-label':'Select map'});data.worldMaps.forEach(w=>picker.append(el('option',{value:w.id,text:w.name})));picker.value=world.id;
 picker.addEventListener('change',()=>{data.activeWorldMap=picker.value;persist();draw()});
 const map=el('div',{class:'cs-map cs-map-edit','aria-label':'Editable fantasy map'});map.style.touchAction='none';
@@ -786,6 +794,7 @@ if(world.background){map.style.backgroundImage='linear-gradient(#08061618,#08061
 const status=el('div',{class:'cs-map-hint',text:'Tap the map to position a landmark · Drag a pin to move it'});
 const name=field('Landmark name','text','e.g. Moonfall Castle');const description=field('Description','textarea','Describe the location');
 const position=el('p',{class:'cs-empty',text:'Position: 50% across, 50% down'});
+name.input.addEventListener('input',markDirty);description.input.addEventListener('input',markDirty);
 let chosen={x:50,y:50},editing=null,dragging=null,wasDragged=false;
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
 function coordinates(e){const r=map.getBoundingClientRect();return{x:Math.round(clamp((e.clientX-r.left)/r.width*100,3,97)),y:Math.round(clamp((e.clientY-r.top)/r.height*100,7,96))}}
@@ -796,12 +805,12 @@ function refreshList(){list.replaceChildren();world.pins.forEach((pin,i)=>{const
 actions.append(btn('Edit',()=>{editing=i;name.input.value=pin.name;description.input.value=pin.description||'';choose({x:pin.x,y:pin.y});saveButton.textContent='✓ Update landmark';name.input.focus()}),btn('Delete',()=>{if(!confirm('Delete this landmark?'))return;world.pins.splice(i,1);persist();draw()}));item.append(actions);list.append(item)});if(!world.pins.length)list.append(el('p',{class:'cs-empty',text:'No landmarks yet. Tap the map and add one.'}))}
 function renderPins(){map.querySelectorAll('.cs-pin').forEach(p=>p.remove());world.pins.forEach((pin,i)=>{const b=el('button',{class:'cs-pin',type:'button',text:'📍 '+pin.name,title:'Drag to move · tap to edit'});b.style.left=pin.x+'%';b.style.top=pin.y+'%';b.style.touchAction='none';b.addEventListener('pointerdown',e=>{e.stopPropagation();dragging={i,id:e.pointerId,startX:e.clientX,startY:e.clientY};wasDragged=false;b.setPointerCapture(e.pointerId)});b.addEventListener('pointermove',e=>{if(!dragging||dragging.id!==e.pointerId)return;if(Math.hypot(e.clientX-dragging.startX,e.clientY-dragging.startY)>5)wasDragged=true;if(wasDragged){const pt=coordinates(e);b.style.left=pt.x+'%';b.style.top=pt.y+'%'}});b.addEventListener('pointerup',e=>{if(!dragging)return;const idx=dragging.i;dragging=null;if(wasDragged){Object.assign(world.pins[idx],coordinates(e));persist();refreshList()}else{editing=idx;name.input.value=pin.name;description.input.value=pin.description||'';choose({x:pin.x,y:pin.y});saveButton.textContent='✓ Update landmark';name.input.focus()}});b.addEventListener('pointercancel',()=>dragging=null);map.append(b)})}
 map.addEventListener('click',e=>{if(e.target.closest('.cs-pin'))return;choose(coordinates(e))});map.append(status);
-const saveButton=btn('＋ Add landmark',()=>{const title=name.input.value.trim();if(!title)return alert('Enter a landmark name.');const pin={id:'pin-'+Date.now(),name:title,description:description.input.value.trim(),...chosen};if(editing===null)world.pins.push(pin);else world.pins[editing]={...world.pins[editing],...pin};editing=null;name.input.value='';description.input.value='';saveButton.textContent='＋ Add landmark';persist();renderPins();refreshList()},true);
-const cancel=btn('Clear editor',()=>{editing=null;name.input.value='';description.input.value='';saveButton.textContent='＋ Add landmark';choose({x:50,y:50})});
+const saveButton=btn('＋ Add landmark',()=>{const title=name.input.value.trim();if(!title)return alert('Enter a landmark name.');const pin={id:'pin-'+Date.now(),name:title,description:description.input.value.trim(),...chosen};if(editing===null)world.pins.push(pin);else world.pins[editing]={...world.pins[editing],...pin};editing=null;name.input.value='';description.input.value='';saveButton.textContent='＋ Add landmark';persist();confirmSaved();renderPins();refreshList()},true);
+const cancel=btn('Clear editor',()=>{editing=null;name.input.value='';description.input.value='';saveButton.textContent='＋ Add landmark';confirmSaved();choose({x:50,y:50})});
 const imageUpload=el('input',{type:'file',accept:'image/png,image/jpeg,image/webp','aria-label':'Upload map background'});
 imageUpload.addEventListener('change',async()=>{const file=imageUpload.files?.[0];if(!file)return;if(!file.type.startsWith('image/'))return alert('Choose an image.');if(file.size>12000000)return alert('Choose an image smaller than 12 MB.');try{const bitmap=await createImageBitmap(file);const scale=Math.min(1,1200/Math.max(bitmap.width,bitmap.height));const canvas=document.createElement('canvas');canvas.width=Math.round(bitmap.width*scale);canvas.height=Math.round(bitmap.height*scale);canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();world.background=canvas.toDataURL('image/jpeg',.68);persist();draw()}catch(err){alert('Could not load that picture: '+err.message)}});
 const exportButton=btn('↓ Export map PNG',async()=>{try{const canvas=document.createElement('canvas');canvas.width=1400;canvas.height=850;const ctx=canvas.getContext('2d');ctx.fillStyle='#15102a';ctx.fillRect(0,0,1400,850);if(world.background){const img=new Image();img.src=world.background;await img.decode();const scale=Math.max(1400/img.width,850/img.height),w=img.width*scale,h=img.height*scale;ctx.drawImage(img,(1400-w)/2,(850-h)/2,w,h)}else{ctx.fillStyle='#242343';ctx.fillRect(0,0,1400,850);ctx.strokeStyle='#ffffff18';for(let x=0;x<1400;x+=70){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,850);ctx.stroke()}for(let y=0;y<850;y+=70){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1400,y);ctx.stroke()}}ctx.fillStyle='#fff';ctx.font='bold 36px sans-serif';ctx.fillText(world.name.slice(0,40),35,55);ctx.font='bold 22px sans-serif';world.pins.forEach(p=>{const x=p.x*14,y=p.y*8.5;ctx.fillStyle='#d69cff';ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.fillText(p.name.slice(0,24),x+15,y+7)});canvas.toBlob(blob=>{if(!blob)return alert('Could not export map.');const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=(world.name.replace(/[^a-z0-9-]/gi,'-')||'fantasy-map')+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000)},'image/png')}catch(err){alert('Map export failed: '+err.message)}});
-const mapControls=el('div',{class:'cs-row'},[picker,btn('＋ New map',()=>{const title=prompt('Name your new map:');if(!title?.trim())return;const id='world-'+Date.now();data.worldMaps.push({id,name:title.trim().slice(0,70),background:'',pins:[]});data.activeWorldMap=id;persist();draw()}),btn('Duplicate map',()=>{const copy=JSON.parse(JSON.stringify(world));copy.id='world-'+Date.now();copy.name=world.name+' (copy)';data.worldMaps.push(copy);data.activeWorldMap=copy.id;persist();draw()}),btn('Rename',()=>{const title=prompt('Map name:',world.name);if(!title?.trim())return;world.name=title.trim().slice(0,70);persist();draw()}),btn('Delete map',()=>{if(data.worldMaps.length===1)return alert('Keep at least one map. You can clear its landmarks instead.');if(!confirm('Delete this map and its landmarks?'))return;data.worldMaps=data.worldMaps.filter(w=>w.id!==world.id);data.activeWorldMap=data.worldMaps[0].id;persist();draw()})]);
+const mapControls=el('div',{class:'cs-row'},[saveMap,saveState,picker,btn('＋ New map',()=>{const title=prompt('Name your new map:');if(!title?.trim())return;const id='world-'+Date.now();data.worldMaps.push({id,name:title.trim().slice(0,70),background:'',pins:[]});data.activeWorldMap=id;persist();draw()}),btn('Duplicate map',()=>{const copy=JSON.parse(JSON.stringify(world));copy.id='world-'+Date.now();copy.name=world.name+' (copy)';data.worldMaps.push(copy);data.activeWorldMap=copy.id;persist();draw()}),btn('Rename',()=>{const title=prompt('Map name:',world.name);if(!title?.trim())return;world.name=title.trim().slice(0,70);persist();draw()}),btn('Delete map',()=>{if(data.worldMaps.length===1)return alert('Keep at least one map. You can clear its landmarks instead.');if(!confirm('Delete this map and its landmarks?'))return;data.worldMaps=data.worldMaps.filter(w=>w.id!==world.id);data.activeWorldMap=data.worldMaps[0].id;persist();draw()})]);
 workspace.append(mapControls,el('div',{class:'cs-layout'},[panel('Map canvas',[map,el('div',{class:'cs-row'},[exportButton])]),panel('Landmarks and background',[el('label',{class:'cs-field'},[el('span',{text:'Upload map background (phone gallery or PC)'}),imageUpload]),btn('Remove background',()=>{world.background='';persist();draw()}),name.node,description.node,position,el('div',{class:'cs-row'},[saveButton,cancel]),el('h3',{text:'Saved landmarks'}),list])]));root.append(workspace);choose({x:50,y:50});renderPins();refreshList();
 }
 function drawRelations(root){

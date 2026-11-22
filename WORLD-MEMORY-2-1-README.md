@@ -1,0 +1,1 @@
+World Memory 2.1: repaired AI Chat world selector JavaScript, added manual Save Map button and save/unsaved indicator, retained auto-save and existing local browser storage. Inspector reads worldMaps and pins. Backup your work before updating. No cross-device sync.
