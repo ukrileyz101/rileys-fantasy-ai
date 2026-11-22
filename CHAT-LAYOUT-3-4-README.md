@@ -1,0 +1,1 @@
+3.4 minimal desktop chat height adjustment only: top 116px -> 80px and bottom 108px -> 94px, giving 50px more vertical room. Composer, memory, mobile layout and storage logic unchanged.
