@@ -1,0 +1,1 @@
+World Memory 2.0: worldMaps/activeWorldMap support, per-chat world selector, inspector, AI context. Local browser storage only. Test with named landmark. Keep a backup before deploying.
