@@ -1,0 +1,1 @@
+Chat Layout 3.1: the message composer aligns to the actual chat transcript left and right edges, with a tidy Send button and mobile keyboard viewport handling. Existing local data keys unchanged. Test in browser.

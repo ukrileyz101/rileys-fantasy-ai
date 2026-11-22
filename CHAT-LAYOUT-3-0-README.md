@@ -1,0 +1,1 @@
+Chat Layout 3.0: raises fixed composer 28px desktop/19px mobile, enlarges input, improves Send button. Retains 2.9 viewport positioning and saved browser data.

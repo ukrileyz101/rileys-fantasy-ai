@@ -383,59 +383,30 @@ html.intro-seen #l53Intro{display:none!important}
 #chat.view.active #chatlog{flex:1 1 0!important;min-height:0!important;overflow-y:auto!important}
 #chat.view.active #chatForm.composer{flex:0 0 auto!important;display:flex!important;visibility:visible!important}
 @media(max-width:700px){#chat.view.active .riley-memory-pickers{max-height:24dvh!important}}
-</style><style id="riley-chat-fixed-2-8">
-/* The composer is moved to document.body, outside every scrolling/clipping ancestor. */
-body > #chatForm.composer{display:none!important}
-body.riley-in-chat > #chatForm.composer{
- display:flex!important;position:fixed!important;left:clamp(202px,calc(190px + 1.2vw),220px)!important;
- right:16px!important;bottom:12px!important;top:auto!important;width:auto!important;
- max-width:none!important;min-height:66px!important;height:auto!important;
- margin:0!important;padding:8px!important;box-sizing:border-box!important;z-index:2147483000!important;
- visibility:visible!important;opacity:1!important;background:#2c193e!important;
- border:1px solid #8054ab!important;border-radius:16px!important;
- box-shadow:0 10px 36px #000a!important;transform:none!important;
+</style><style id="riley-chat-layout-3-2">
+/* Single authoritative dock; no competing 2.8/2.9/3.0/3.1 rules. */
+html body > form#chatForm.composer{display:none!important}
+html body.riley-in-chat > form#chatForm.composer{
+ display:flex!important;position:fixed!important;inset:auto var(--dock-right,16px) var(--dock-bottom,18px) var(--dock-left,210px)!important;
+ box-sizing:border-box!important;width:auto!important;max-width:none!important;min-height:68px!important;height:auto!important;
+ margin:0!important;padding:8px!important;gap:8px!important;align-items:stretch!important;flex-direction:row!important;
+ visibility:visible!important;opacity:1!important;transform:none!important;translate:none!important;
+ z-index:2147483640!important;background:#2c193e!important;border:1px solid #9562c3!important;border-radius:15px!important;
+ box-shadow:0 6px 24px #0009!important;
 }
-body.riley-in-chat > #chatForm.composer textarea{
- display:block!important;flex:1 1 auto!important;min-width:0!important;min-height:46px!important;
- height:50px!important;max-height:120px!important;resize:vertical!important;
+html body.riley-in-chat > form#chatForm.composer textarea{
+ flex:1 1 auto!important;width:100%!important;min-width:0!important;height:52px!important;min-height:52px!important;
+ max-height:130px!important;resize:vertical!important;box-sizing:border-box!important;padding:12px!important;
 }
-body.riley-in-chat > #chatForm.composer button{
- display:block!important;flex:0 0 auto!important;min-width:84px!important;
+html body.riley-in-chat > form#chatForm.composer button{
+ flex:0 0 82px!important;min-width:82px!important;max-width:82px!important;white-space:nowrap!important;
 }
-body.riley-in-chat #chat.view.active{
- position:fixed!important;top:52px!important;bottom:0!important;left:190px!important;right:0!important;
- width:auto!important;height:auto!important;max-height:none!important;min-height:0!important;
- overflow:hidden!important;background:#0b0712!important;animation:none!important;
-}
-body.riley-in-chat #chat.view.active .chat-layout{
- display:flex!important;flex-direction:column!important;box-sizing:border-box!important;
- width:min(100%,1450px)!important;max-width:1450px!important;height:100%!important;min-height:0!important;
- max-height:100%!important;overflow:hidden!important;margin:0 auto!important;
- padding:8px 14px 100px!important;gap:7px!important;
-}
-body.riley-in-chat #chat.view.active #chatlog{
- flex:1 1 0!important;min-height:0!important;height:auto!important;max-height:none!important;
- overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important;
- margin:0!important;padding:12px!important;
-}
-body.riley-in-chat #chat.view.active .l5-chat-actions,
-body.riley-in-chat #chat.view.active .chat-head,
-body.riley-in-chat #chat.view.active .riley-chat-toolbar,
-body.riley-in-chat #chat.view.active .riley-memory-pickers{flex-shrink:0!important}
-body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:25dvh!important;overflow:auto!important}
+html body.riley-in-chat #chat.view.active .chat-layout{padding-bottom:108px!important}
 @media(max-width:700px){
- body.riley-in-chat #chat.view.active{inset:0!important;height:100dvh!important}
- body.riley-in-chat #chat.view.active .chat-layout{padding:6px 8px calc(84px + env(safe-area-inset-bottom))!important;gap:5px!important}
- body.riley-in-chat > #chatForm.composer{
-  left:7px!important;right:7px!important;bottom:calc(7px + env(safe-area-inset-bottom))!important;
-  min-height:60px!important;padding:6px!important;
- }
- body.riley-in-chat > #chatForm.composer textarea{height:44px!important;min-height:44px!important}
- body.riley-in-chat > #chatForm.composer button{min-width:68px!important}
- body.riley-in-chat #chat.view.active .luxe-chat-kicker,
- body.riley-in-chat #chat.view.active .l6-chat-tip{display:none!important}
- body.riley-in-chat #chat.view.active .l5-chat-actions{overflow-x:auto!important;white-space:nowrap!important;max-height:44px!important}
- body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:24dvh!important}
+ html body.riley-in-chat > form#chatForm.composer{min-height:60px!important;padding:6px!important}
+ html body.riley-in-chat > form#chatForm.composer textarea{height:46px!important;min-height:46px!important}
+ html body.riley-in-chat > form#chatForm.composer button{flex-basis:70px!important;min-width:70px!important;max-width:70px!important}
+ html body.riley-in-chat #chat.view.active .chat-layout{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
 }
 </style></head><body class="on-welcome"><div id="l53Intro" role="dialog" aria-label="Welcome to Riley’s Fantasy AI" aria-modal="true">
   <div class="intro-film-bg" aria-hidden="true"></div><div class="intro-film-stars" aria-hidden="true"></div>
@@ -1125,4 +1096,73 @@ $('cs-import').addEventListener('change',async e=>{const f=e.target.files?.[0];i
  update();
 })();
 </script>
-</body></html>
+<script id="riley-chat-layout-3-2-script">
+(function(){
+ const chat=document.getElementById('chat'),composer=document.getElementById('chatForm');
+ if(!chat||!composer)return;
+ let queued=false;
+ function update(){
+  queued=false;
+  const active=chat.classList.contains('active');
+  document.body.classList.toggle('riley-in-chat',active);
+  if(!active)return;
+  if(composer.parentElement!==document.body)document.body.appendChild(composer);
+  const mobile=window.matchMedia('(max-width:700px)').matches;
+  const panel=document.getElementById('chatlog');
+  const rect=panel.getBoundingClientRect();
+  const vw=document.documentElement.clientWidth;
+  let left=mobile?8:Math.round(rect.left);
+  let right=mobile?8:Math.round(vw-rect.right);
+  if(left+right>vw-220){left=8;right=8;}
+  const vv=window.visualViewport;
+  const obscured=vv?Math.max(0,window.innerHeight-vv.offsetTop-vv.height):0;
+  const bottom=Math.round(obscured+(mobile?8:18));
+  composer.style.setProperty('--dock-left',left+'px');
+  composer.style.setProperty('--dock-right',right+'px');
+  composer.style.setProperty('--dock-bottom',bottom+'px');
+ }
+ function schedule(){if(!queued){queued=true;requestAnimationFrame(update)}}
+ window.addEventListener('resize',schedule);
+ window.visualViewport?.addEventListener('resize',schedule);
+ window.visualViewport?.addEventListener('scroll',schedule);
+ document.addEventListener('click',schedule);
+ document.addEventListener('focusin',schedule);
+ new MutationObserver(schedule).observe(chat,{attributes:true,attributeFilter:['class']});
+ schedule();
+})();
+</script><style id="riley-chat-layout-3-3">
+/* Repair only the collapsed message viewport; preserve the existing fixed composer. */
+@media(min-width:701px){
+ html body.riley-in-chat #chat.view.active{
+  position:fixed!important;top:116px!important;bottom:108px!important;left:186px!important;right:0!important;
+  height:auto!important;min-height:0!important;max-height:none!important;width:auto!important;
+  display:flex!important;flex-direction:column!important;overflow:hidden!important;box-sizing:border-box!important;
+ }
+}
+html body.riley-in-chat #chat.view.active .chat-layout{
+ display:flex!important;flex-direction:column!important;flex:1 1 auto!important;
+ height:100%!important;min-height:0!important;max-height:100%!important;overflow:hidden!important;
+ box-sizing:border-box!important;padding:8px 16px 8px!important;gap:7px!important;
+}
+html body.riley-in-chat #chat.view.active #chatlog.chatlog{
+ display:flex!important;flex-direction:column!important;flex:1 1 0%!important;
+ height:0!important;min-height:0!important;max-height:none!important;
+ overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important;
+ box-sizing:border-box!important;margin:0!important;padding:14px!important;
+}
+html body.riley-in-chat #chat.view.active .l5-chat-actions,
+html body.riley-in-chat #chat.view.active .chat-head,
+html body.riley-in-chat #chat.view.active .riley-chat-toolbar,
+html body.riley-in-chat #chat.view.active .riley-memory-pickers,
+html body.riley-in-chat #chat.view.active #aiStatus{flex:0 0 auto!important}
+html body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:26vh!important;overflow-y:auto!important}
+@media(max-width:700px){
+ html body.riley-in-chat #chat.view.active{
+  position:fixed!important;inset:0 0 calc(92px + env(safe-area-inset-bottom)) 0!important;
+  width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+  overflow:hidden!important;display:flex!important;flex-direction:column!important;
+ }
+ html body.riley-in-chat #chat.view.active .chat-layout{padding:6px 8px 4px!important}
+ html body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:22dvh!important}
+}
+</style></body></html>

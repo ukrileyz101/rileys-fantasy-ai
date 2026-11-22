@@ -1,0 +1,1 @@
+3.2 removes competing fixed composer CSS and scripts from 2.8, 2.9, 3.0 and 3.1. One dock now aligns with chatlog and stays inside viewport. Existing local storage keys unchanged.

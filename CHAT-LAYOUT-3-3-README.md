@@ -1,0 +1,1 @@
+3.3 fixes collapsed chat transcript: constrains chat section to available viewport height, gives chatlog all remaining space and independent scrolling. Does not change chat form positioning or saved data.

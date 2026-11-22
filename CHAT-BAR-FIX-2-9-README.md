@@ -1,0 +1,1 @@
+2.9: Chat composer is docked to the actual visible viewport, with visualViewport handling for mobile keyboards, and its own high-priority layout rules. Conversation scrolls separately. No storage changes.
