@@ -1,0 +1,1 @@
+Mobile-only 3.5: compact header and controls; Story Memory starts collapsed on first mobile chat visit; transcript fills remaining screen and scrolls; smaller docked composer. Desktop styling unchanged. No storage keys changed.

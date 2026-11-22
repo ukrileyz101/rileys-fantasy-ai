@@ -408,6 +408,66 @@ html body.riley-in-chat #chat.view.active .chat-layout{padding-bottom:108px!impo
  html body.riley-in-chat > form#chatForm.composer button{flex-basis:70px!important;min-width:70px!important;max-width:70px!important}
  html body.riley-in-chat #chat.view.active .chat-layout{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
 }
+</style><style id="riley-mobile-chat-3-5">
+/* Phone-only: independently scrolling transcript, compact chrome, visible composer. */
+@media(max-width:700px){
+ html body.riley-in-chat #chat.view.active{
+  position:fixed!important;top:0!important;bottom:calc(82px + env(safe-area-inset-bottom))!important;
+  left:0!important;right:0!important;width:100%!important;height:auto!important;
+  min-height:0!important;max-height:none!important;overflow:hidden!important;
+  display:flex!important;flex-direction:column!important;box-sizing:border-box!important;
+ }
+ html body.riley-in-chat #chat.view.active .chat-layout{
+  display:flex!important;flex-direction:column!important;flex:1 1 auto!important;
+  height:100%!important;max-height:100%!important;min-height:0!important;
+  overflow:hidden!important;box-sizing:border-box!important;
+  padding:6px 9px 0!important;gap:6px!important;
+ }
+ html body.riley-in-chat #chat.view.active #chatlog.chatlog{
+  display:flex!important;flex-direction:column!important;flex:1 1 0%!important;
+  height:0!important;min-height:0!important;max-height:none!important;
+  overflow-y:auto!important;overflow-x:hidden!important;
+  margin:0!important;padding:10px!important;overscroll-behavior:contain!important;
+ }
+ html body.riley-in-chat #chat.view.active .riley-memory-pickers{
+  flex:0 0 auto!important;max-height:min(25dvh,170px)!important;
+  overflow-y:auto!important;margin:0!important;padding:8px!important;
+ }
+ html body.riley-in-chat #chat.view.active .riley-chat-toolbar{
+  flex:0 0 auto!important;display:flex!important;gap:6px!important;
+  margin:2px 0!important;flex-wrap:nowrap!important;
+ }
+ html body.riley-in-chat #chat.view.active .riley-chat-toolbar button{
+  flex:1 1 0!important;min-width:0!important;padding:7px 5px!important;
+  font-size:12px!important;white-space:normal!important;
+ }
+ html body.riley-in-chat #chat.view.active .chat-head{
+  flex:0 0 auto!important;padding:7px 9px!important;gap:8px!important;
+ }
+ html body.riley-in-chat #chat.view.active .chat-head h2{font-size:16px!important;line-height:1.2!important}
+ html body.riley-in-chat #chat.view.active .chat-head p{font-size:11px!important;line-height:1.3!important}
+ html body.riley-in-chat #chat.view.active .chat-head .avatar{width:40px!important;height:40px!important;flex:0 0 40px!important}
+ html body.riley-in-chat #chat.view.active .l5-chat-actions{
+  flex:0 0 auto!important;max-height:39px!important;overflow-x:auto!important;
+  white-space:nowrap!important;flex-wrap:nowrap!important;
+ }
+ html body.riley-in-chat #chat.view.active .luxe-chat-kicker,
+ html body.riley-in-chat #chat.view.active .l6-chat-tip{display:none!important}
+ html body.riley-in-chat #chat.view.active #aiStatus{flex:0 0 auto!important;font-size:10px!important;max-height:16px!important;overflow:hidden!important}
+ html body.riley-in-chat > form#chatForm.composer{
+  position:fixed!important;inset:auto 8px calc(8px + env(safe-area-inset-bottom)) 8px!important;
+  width:auto!important;height:auto!important;min-height:54px!important;
+  padding:5px!important;gap:5px!important;z-index:2147483640!important;
+ }
+ html body.riley-in-chat > form#chatForm.composer textarea{
+  height:42px!important;min-height:42px!important;max-height:100px!important;
+  padding:9px!important;font-size:14px!important;
+ }
+ html body.riley-in-chat > form#chatForm.composer button{
+  flex:0 0 64px!important;min-width:64px!important;max-width:64px!important;
+  min-height:42px!important;padding:6px!important;font-size:14px!important;
+ }
+}
 </style></head><body class="on-welcome"><div id="l53Intro" role="dialog" aria-label="Welcome to Riley’s Fantasy AI" aria-modal="true">
   <div class="intro-film-bg" aria-hidden="true"></div><div class="intro-film-stars" aria-hidden="true"></div>
   <div class="intro-film-shade" aria-hidden="true"></div>
@@ -1165,4 +1225,18 @@ html body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:26vh!
  html body.riley-in-chat #chat.view.active .chat-layout{padding:6px 8px 4px!important}
  html body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:22dvh!important}
 }
-</style></body></html>
+</style><script id="riley-mobile-chat-3-5-script">
+(function(){
+ const chat=document.getElementById('chat');
+ const toggle=document.getElementById('rileyToggleMemory');
+ if(!chat||!toggle)return;
+ let firstMobileChat=true;
+ function compactOnFirstVisit(){
+  if(!firstMobileChat||!window.matchMedia('(max-width:700px)').matches||!chat.classList.contains('active'))return;
+  firstMobileChat=false;
+  if(!chat.classList.contains('memory-collapsed'))toggle.click();
+ }
+ new MutationObserver(compactOnFirstVisit).observe(chat,{attributes:true,attributeFilter:['class']});
+ compactOnFirstVisit();
+})();
+</script></body></html>
