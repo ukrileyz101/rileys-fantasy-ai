@@ -1,0 +1,1 @@
+Fixes Show Story Memory pushing chat composer off screen. The previous viewport CSS relied on a body class never applied; now it targets active chat directly. Transcript flex-shrinks and scrolls while input stays visible. Browser data is unchanged.

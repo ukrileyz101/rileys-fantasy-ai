@@ -1,0 +1,1 @@
+2.8: The message composer is moved to document.body when chat opens, so it cannot scroll out of view or be clipped by the conversation. Fixed viewport chat and independently scrolling transcript. Existing local data is unchanged. Test mobile keyboard and desktop.

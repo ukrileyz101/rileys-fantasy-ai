@@ -375,67 +375,67 @@ html.intro-seen #l53Intro{display:none!important}
 #chat.active #chatForm.composer textarea{min-height:54px!important;max-height:140px!important}
 @media(max-width:700px){#chat.active .chat-layout{padding-bottom:100px!important}#chat.active #chatForm.composer{bottom:4px!important}}
 </style>
-<style id="riley-chat-layout-2-5">
-/* Keep the message composer visible while the conversation takes the remaining space. */
-#chat.view.active .chat-layout{box-sizing:border-box!important}
-#chat.view.active #chatForm.composer{display:flex!important;visibility:visible!important}
-@media(min-width:701px){
- #chat.view.active .chat-layout{min-height:calc(100dvh - 70px)!important;padding-bottom:105px!important}
- #chat.view.active #chatForm.composer{position:fixed!important;bottom:12px!important;left:calc(220px + (100vw - 220px - min(100vw - 250px, 1350px))/2)!important;width:min(calc(100vw - 250px),1350px)!important;margin:0!important;z-index:500!important}
- #chat.view.active #chatlog{min-height:clamp(430px,65dvh,950px)!important}
+
+<style id="riley-chat-memory-2-7">
+#chat.view.active .chat-layout{display:flex!important;flex-direction:column!important;min-height:0!important;overflow:hidden!important}
+#chat.view.active .riley-memory-pickers{flex:0 0 auto!important;max-height:min(28dvh,200px)!important;overflow-y:auto!important}
+#chat.view.active.memory-collapsed .riley-memory-pickers{display:none!important}
+#chat.view.active #chatlog{flex:1 1 0!important;min-height:0!important;overflow-y:auto!important}
+#chat.view.active #chatForm.composer{flex:0 0 auto!important;display:flex!important;visibility:visible!important}
+@media(max-width:700px){#chat.view.active .riley-memory-pickers{max-height:24dvh!important}}
+</style><style id="riley-chat-fixed-2-8">
+/* The composer is moved to document.body, outside every scrolling/clipping ancestor. */
+body > #chatForm.composer{display:none!important}
+body.riley-in-chat > #chatForm.composer{
+ display:flex!important;position:fixed!important;left:clamp(202px,calc(190px + 1.2vw),220px)!important;
+ right:16px!important;bottom:12px!important;top:auto!important;width:auto!important;
+ max-width:none!important;min-height:66px!important;height:auto!important;
+ margin:0!important;padding:8px!important;box-sizing:border-box!important;z-index:2147483000!important;
+ visibility:visible!important;opacity:1!important;background:#2c193e!important;
+ border:1px solid #8054ab!important;border-radius:16px!important;
+ box-shadow:0 10px 36px #000a!important;transform:none!important;
 }
-@media(max-width:700px){
- body.riley-in-chat #chat.view.active{position:fixed!important;inset:0!important;height:100dvh!important;min-height:0!important;max-height:100dvh!important;overflow:hidden!important;z-index:9999!important}
- body.riley-in-chat #chat.view.active .chat-layout{height:100dvh!important;min-height:0!important;max-height:100dvh!important;overflow:hidden!important;padding:8px 9px calc(90px + env(safe-area-inset-bottom))!important;display:flex!important;flex-direction:column!important;gap:6px!important}
- body.riley-in-chat #chat .l5-chat-actions,body.riley-in-chat #chat .chat-head,body.riley-in-chat #chat .riley-chat-toolbar,body.riley-in-chat #chat .riley-memory-pickers{flex:0 0 auto!important}
- body.riley-in-chat #chat .luxe-chat-kicker,body.riley-in-chat #chat .l6-chat-tip{display:none!important}
- body.riley-in-chat #chat .riley-memory-pickers{max-height:24dvh!important;overflow:auto!important}
- body.riley-in-chat #chat #chatlog{flex:1 1 0!important;height:0!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain!important;margin:0!important;padding:12px!important}
- body.riley-in-chat #chat #chatForm.composer{position:fixed!important;left:8px!important;right:8px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;width:auto!important;height:auto!important;min-height:0!important;margin:0!important;padding:7px!important;z-index:10010!important;display:flex!important;flex-direction:row!important;gap:7px!important;background:#261535!important;box-shadow:0 0 0 1px #8052a4,0 10px 30px #000b!important}
- body.riley-in-chat #chat #chatForm.composer textarea{flex:1 1 auto!important;width:0!important;min-height:46px!important;height:46px!important;max-height:110px!important}
- body.riley-in-chat #chat #chatForm.composer button{flex:0 0 72px!important;min-width:72px!important;min-height:46px!important}
- body.riley-in-chat #chat .status{display:none!important}
+body.riley-in-chat > #chatForm.composer textarea{
+ display:block!important;flex:1 1 auto!important;min-width:0!important;min-height:46px!important;
+ height:50px!important;max-height:120px!important;resize:vertical!important;
 }
-</style>
-<style id="riley-chat-layout-2-6">
-/* Viewport chat: composer is a flex child, never below a growing transcript. */
+body.riley-in-chat > #chatForm.composer button{
+ display:block!important;flex:0 0 auto!important;min-width:84px!important;
+}
 body.riley-in-chat #chat.view.active{
- position:fixed!important;top:54px!important;right:0!important;bottom:0!important;left:190px!important;
- height:auto!important;min-height:0!important;overflow:hidden!important;z-index:2000!important;
- background:#0b0712!important;animation:none!important;
+ position:fixed!important;top:52px!important;bottom:0!important;left:190px!important;right:0!important;
+ width:auto!important;height:auto!important;max-height:none!important;min-height:0!important;
+ overflow:hidden!important;background:#0b0712!important;animation:none!important;
 }
 body.riley-in-chat #chat.view.active .chat-layout{
  display:flex!important;flex-direction:column!important;box-sizing:border-box!important;
- width:min(100%,1450px)!important;max-width:1450px!important;height:100%!important;max-height:100%!important;
- min-height:0!important;margin:0 auto!important;padding:10px 14px 10px!important;gap:8px!important;
- overflow:hidden!important;
+ width:min(100%,1450px)!important;max-width:1450px!important;height:100%!important;min-height:0!important;
+ max-height:100%!important;overflow:hidden!important;margin:0 auto!important;
+ padding:8px 14px 100px!important;gap:7px!important;
 }
 body.riley-in-chat #chat.view.active #chatlog{
- flex:1 1 0!important;min-height:0!important;max-height:none!important;height:auto!important;
- overflow-y:auto!important;overflow-x:hidden!important;margin:0!important;overscroll-behavior:contain!important;
+ flex:1 1 0!important;min-height:0!important;height:auto!important;max-height:none!important;
+ overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important;
+ margin:0!important;padding:12px!important;
 }
-body.riley-in-chat #chat.view.active #chatForm.composer{
- display:flex!important;position:relative!important;inset:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
- flex:0 0 auto!important;align-self:stretch!important;width:100%!important;max-width:none!important;
- margin:0!important;z-index:10!important;visibility:visible!important;
- background:#261535!important;
-}
-body.riley-in-chat #chat.view.active #chatForm.composer textarea{flex:1 1 auto!important;min-width:0!important;min-height:46px!important;height:52px!important;max-height:110px!important}
-body.riley-in-chat #chat.view.active #chatForm.composer button{flex:0 0 auto!important;min-width:80px!important}
 body.riley-in-chat #chat.view.active .l5-chat-actions,
 body.riley-in-chat #chat.view.active .chat-head,
 body.riley-in-chat #chat.view.active .riley-chat-toolbar,
 body.riley-in-chat #chat.view.active .riley-memory-pickers{flex-shrink:0!important}
-body.riley-in-chat #chat.view.active .status{flex-shrink:0!important}
+body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:25dvh!important;overflow:auto!important}
 @media(max-width:700px){
- body.riley-in-chat #chat.view.active{top:0!important;left:0!important;right:0!important;bottom:0!important;height:100dvh!important}
- body.riley-in-chat #chat.view.active .chat-layout{padding:8px 8px calc(10px + env(safe-area-inset-bottom))!important;gap:6px!important}
- body.riley-in-chat #chat.view.active .l5-chat-actions{overflow-x:auto!important;white-space:nowrap!important;max-height:45px!important}
- body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:23dvh!important;overflow:auto!important}
- body.riley-in-chat #chat.view.active .chat-head{padding:7px!important}
- body.riley-in-chat #chat.view.active #chatForm.composer{padding:6px!important}
- body.riley-in-chat #chat.view.active #chatForm.composer textarea{height:44px!important;min-height:44px!important}
- body.riley-in-chat #chat.view.active #chatForm.composer button{min-width:68px!important}
+ body.riley-in-chat #chat.view.active{inset:0!important;height:100dvh!important}
+ body.riley-in-chat #chat.view.active .chat-layout{padding:6px 8px calc(84px + env(safe-area-inset-bottom))!important;gap:5px!important}
+ body.riley-in-chat > #chatForm.composer{
+  left:7px!important;right:7px!important;bottom:calc(7px + env(safe-area-inset-bottom))!important;
+  min-height:60px!important;padding:6px!important;
+ }
+ body.riley-in-chat > #chatForm.composer textarea{height:44px!important;min-height:44px!important}
+ body.riley-in-chat > #chatForm.composer button{min-width:68px!important}
+ body.riley-in-chat #chat.view.active .luxe-chat-kicker,
+ body.riley-in-chat #chat.view.active .l6-chat-tip{display:none!important}
+ body.riley-in-chat #chat.view.active .l5-chat-actions{overflow-x:auto!important;white-space:nowrap!important;max-height:44px!important}
+ body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:24dvh!important}
 }
 </style></head><body class="on-welcome"><div id="l53Intro" role="dialog" aria-label="Welcome to Riley’s Fantasy AI" aria-modal="true">
   <div class="intro-film-bg" aria-hidden="true"></div><div class="intro-film-stars" aria-hidden="true"></div>
@@ -472,7 +472,7 @@ body.riley-in-chat #chat.view.active .status{flex-shrink:0!important}
 <section class="view" id="more" aria-label="More pages"><div class="mobile-more-page"><div class="more-kicker">✦ EXPLORE YOUR UNIVERSE</div><h1>More to explore.</h1><p>Everything else in Riley's Fantasy AI, all in one place.</p><div class="more-links"><button data-go="creative" type="button"><b>✧ Creative Studio</b><small>Maps, relationships, timelines, covers and more</small><span>›</span></button><button data-go="developer" type="button"><b>♛ Meet the Developer</b><small>Meet Riley and learn about the app</small><span>›</span></button><button data-go="chatpick" type="button"><b>✦ AI Characters</b><small>Discover characters to chat with</small><span>›</span></button><button data-go="settings" type="button"><b>⚙ Settings</b><small>Theme Studio, privacy, AI and backups</small><span>›</span></button></div></div></section>
 <script>
 const $=id=>document.getElementById(id),KEY='riley-fantasy-private-v1';let db;try{db=JSON.parse(localStorage.getItem(KEY))||{}}catch{db={}}db.chats??=[];db.theme??='purple';db.endpoint=db.endpoint||window.RILEY_CONFIG?.aiBackendUrl||'';const storyKeys=['humour','conflict','toxic','violence','horror','romance','sexual','language','friendship','family','betrayal','mystery','adventure','supernatural','survival','comfort','suspense','jealousy','humiliation','tragedy'];const storyDefaults={humour:true,conflict:true,toxic:false,violence:false,horror:false,romance:true,sexual:false,language:false,friendship:true,family:true,betrayal:false,mystery:true,adventure:true,supernatural:false,survival:false,comfort:true,suspense:false,jealousy:false,humiliation:false,tragedy:false};db.storyPrefs??={...storyDefaults,...(db.mature?{language:true,horror:true}:{})};let current=null,genre='Fantasy';const genres=['Fantasy','Romance','Horror','Apocalypse','Sci-Fi','Mystery','School','Adventure','Slice of Life','Historical','Royalty','Pirates','Superheroes','Vampires','Werewolves','Magic Academy','Cyberpunk','Dystopian','Time Travel','Detective','Thriller','Comedy','Drama','Sports','Music','Celebrity Fiction','Fairytale','Mythology','Western','Underwater','Space Opera','Survival','Cozy Mystery','Found Family','Enemies to Friends'];function save(){try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){console.warn('Local storage full; keeping IndexedDB copy if available',e)}if(window.rileyArchiveSave)window.rileyArchiveSave(db)}function renderHybridRecent(){const el=$('hybridRecent');if(!el)return;el.replaceChildren();if(!db.chats.length){const empty=document.createElement('p');empty.className='muted';empty.textContent='Your stories will appear here after you create a character.';el.append(empty);return;}for(const c of db.chats.slice().reverse().slice(0,6)){const btn=document.createElement('button');btn.type='button';btn.className='hybrid-chat';const avatar=document.createElement('span');avatar.className='hybrid-avatar';if(c.photo){const img=document.createElement('img');img.src=c.photo;img.alt='';avatar.append(img)}else avatar.textContent='✦';const info=document.createElement('span');const title=document.createElement('strong');title.textContent=c.title||c.name||'Untitled';const subtitle=document.createElement('small');subtitle.textContent=(c.name||'Character')+' · '+(c.messages?.length||0)+' messages';info.append(title,subtitle);btn.append(avatar,info);btn.onclick=()=>{current=c.id;go('chat')};el.append(btn)}}
-function go(id,fromHistory=false){document.getElementById('mobileMorePanel')?.setAttribute('hidden','');document.getElementById('mobileMoreButton')?.setAttribute('aria-expanded','false');if(id==='new')id='studio';if(!fromHistory&&window.l5Navigate)window.l5Navigate(id);if(id==='chat'&&!current){id='chatpick'}if(id==='studio')applyStoryChoices('chat_',db.storyPrefs);if(id!=='welcome')stopMusic();document.body.classList.toggle('on-welcome',id==='welcome');document.body.classList.toggle('riley-in-chat',id==='chat');document.body.classList.toggle('riley-in-more',id==='more');if(id==='more'){requestAnimationFrame(()=>{const panel=document.getElementById('more');if(panel)panel.scrollTop=0;window.scrollTo(0,0)})}document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id===id));$('side').classList.remove('open');window.scrollTo(0,0);if(id==='saved')renderSaved();if(id==='chatpick')l55RenderChatPicker();if(id==='hub'){renderHybridRecent();l55RenderBots('l55DiscoverBots');}document.querySelectorAll('.hybrid-bottom button,.app-nav button').forEach(b=>b.classList.toggle('active',b.dataset.go===id));if(id==='chat')renderChat();if(id==='welcome')tryWelcomeMusic();}document.addEventListener('click',e=>{let b=e.target.closest('[data-go]');if(b)go(b.dataset.go==='chat'?'chatpick':b.dataset.go)});$('menu').onclick=()=>$('side').classList.toggle('open');
+function go(id,fromHistory=false){document.getElementById('mobileMorePanel')?.setAttribute('hidden','');document.getElementById('mobileMoreButton')?.setAttribute('aria-expanded','false');if(id==='new')id='studio';if(!fromHistory&&window.l5Navigate)window.l5Navigate(id);if(id==='chat'&&!current){id='chatpick'}if(id==='studio')applyStoryChoices('chat_',db.storyPrefs);if(id!=='welcome')stopMusic();document.body.classList.toggle('on-welcome',id==='welcome');document.body.classList.toggle('riley-in-chat',id==='chat');if(id==='chat'){const composer=document.getElementById('chatForm');if(composer&&composer.parentElement!==document.body)document.body.appendChild(composer);}document.body.classList.toggle('riley-in-more',id==='more');if(id==='more'){requestAnimationFrame(()=>{const panel=document.getElementById('more');if(panel)panel.scrollTop=0;window.scrollTo(0,0)})}document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id===id));$('side').classList.remove('open');window.scrollTo(0,0);if(id==='saved')renderSaved();if(id==='chatpick')l55RenderChatPicker();if(id==='hub'){renderHybridRecent();l55RenderBots('l55DiscoverBots');}document.querySelectorAll('.hybrid-bottom button,.app-nav button').forEach(b=>b.classList.toggle('active',b.dataset.go===id));if(id==='chat')renderChat();if(id==='welcome')tryWelcomeMusic();}document.addEventListener('click',e=>{let b=e.target.closest('[data-go]');if(b)go(b.dataset.go==='chat'?'chatpick':b.dataset.go)});$('menu').onclick=()=>$('side').classList.toggle('open');
 for(const g of genres){let b=document.createElement('button');b.type='button';b.className='choice'+(g===genre?' selected':'');b.textContent=g;b.onclick=()=>{genre=g;document.querySelectorAll('.choice').forEach(x=>x.classList.toggle('selected',x===b))};$('genreChoices').append(b)}
 function applyStoryChoices(prefix,values){for(const k of storyKeys){const el=$(prefix+k);if(el)el.checked=!!values[k]}}function readStoryChoices(prefix){return Object.fromEntries(storyKeys.map(k=>[k,!!$(prefix+k)?.checked]))}let selectedPhoto='';
 $('galleryBtn').onclick=()=>$('charPhoto').click();$('cameraBtn').onclick=()=>$('cameraPhoto').click();
@@ -827,18 +827,18 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <style id="riley-2026-mobile-cleanup">
 @media(max-width:680px){
  html,body{max-width:100%;overflow-x:hidden}
- body.riley-in-chat #chat.view.active{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-height:100dvh!important;z-index:9999!important;padding:0!important;margin:0!important;background:#0b0712!important;overflow:hidden!important}
- body.riley-in-chat #chat .chat-layout{width:100%!important;height:100%!important;max-height:100%!important;min-height:0!important;padding:calc(8px + env(safe-area-inset-top)) 9px calc(8px + env(safe-area-inset-bottom))!important;gap:6px!important;display:flex!important;flex-direction:column!important}
- body.riley-in-chat #chat .l5-chat-actions{flex:0 0 auto!important;min-height:42px!important;margin:0!important;padding:2px 0!important}
- body.riley-in-chat #chat .l5-chat-actions button{font-size:12px!important;padding:9px 11px!important}
- body.riley-in-chat #chat .chat-head{flex:0 0 auto!important;margin:0!important;padding:8px!important;border-radius:14px!important}
- body.riley-in-chat #chat .chat-head h2{font-size:16px!important}
- body.riley-in-chat #chat .chatlog{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;margin:0!important;padding:10px!important;overflow-y:auto!important;border-radius:14px!important}
- body.riley-in-chat #chat .bubble{font-size:16px!important;line-height:1.5!important;max-width:94%!important;padding:12px 14px!important}
- body.riley-in-chat #chat .status{flex:0 0 auto!important;max-height:22px!important;font-size:10px!important}
- body.riley-in-chat #chat .composer{flex:0 0 auto!important;position:relative!important;bottom:auto!important;margin:0!important;padding:6px!important;min-height:64px!important;display:flex!important;align-items:stretch!important;z-index:10001!important}
- body.riley-in-chat #chat .composer textarea{font-size:16px!important;min-height:55px!important;max-height:120px!important;line-height:1.35!important;resize:none!important;padding:12px!important}
- body.riley-in-chat #chat .composer button{min-width:75px!important;min-height:55px!important;border-radius:12px!important;font-size:15px!important;padding:8px!important}
+ #chat.view.active{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;max-height:100dvh!important;z-index:9999!important;padding:0!important;margin:0!important;background:#0b0712!important;overflow:hidden!important}
+ #chat.view.active .chat-layout{width:100%!important;height:100%!important;max-height:100%!important;min-height:0!important;padding:calc(8px + env(safe-area-inset-top)) 9px calc(8px + env(safe-area-inset-bottom))!important;gap:6px!important;display:flex!important;flex-direction:column!important}
+ #chat.view.active .l5-chat-actions{flex:0 0 auto!important;min-height:42px!important;margin:0!important;padding:2px 0!important}
+ #chat.view.active .l5-chat-actions button{font-size:12px!important;padding:9px 11px!important}
+ #chat.view.active .chat-head{flex:0 0 auto!important;margin:0!important;padding:8px!important;border-radius:14px!important}
+ #chat.view.active .chat-head h2{font-size:16px!important}
+ #chat.view.active .chatlog{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;margin:0!important;padding:10px!important;overflow-y:auto!important;border-radius:14px!important}
+ #chat.view.active .bubble{font-size:16px!important;line-height:1.5!important;max-width:94%!important;padding:12px 14px!important}
+ #chat.view.active .status{flex:0 0 auto!important;max-height:22px!important;font-size:10px!important}
+ #chat.view.active .composer{flex:0 0 auto!important;position:relative!important;bottom:auto!important;margin:0!important;padding:6px!important;min-height:64px!important;display:flex!important;align-items:stretch!important;z-index:10001!important}
+ #chat.view.active .composer textarea{font-size:16px!important;min-height:55px!important;max-height:120px!important;line-height:1.35!important;resize:none!important;padding:12px!important}
+ #chat.view.active .composer button{min-width:75px!important;min-height:55px!important;border-radius:12px!important;font-size:15px!important;padding:8px!important}
  /* More: its cards must be visible immediately, not below a blank hero gap. */
  body.riley-in-more .hybrid-bottom{z-index:9999!important}
  body.riley-in-more #more.view.active{display:block!important;position:fixed!important;top:0!important;bottom:calc(66px + env(safe-area-inset-bottom))!important;left:0!important;right:0!important;inset:0 0 calc(66px + env(safe-area-inset-bottom)) 0!important;z-index:9000!important;overflow-y:auto!important;overscroll-behavior:contain!important;scroll-padding-top:0!important;margin:0!important;padding:0!important;background:#0b0712!important;transform:none!important}
