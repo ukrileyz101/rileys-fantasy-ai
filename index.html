@@ -481,7 +481,51 @@ html body.riley-in-chat #chat.view.active .chat-layout{padding-bottom:108px!impo
  html body.riley-in-chat #chat.view.active .riley-chat-toolbar{margin:0!important}
  html body.riley-in-chat #chat.view.active .riley-memory-pickers{max-height:19dvh!important}
 }
-</style></head><body class="on-welcome"><div id="l53Intro" role="dialog" aria-label="Welcome to Riley’s Fantasy AI" aria-modal="true">
+</style>
+<style id="riley-v4-redesign">
+/* Version 4.0 — fantasy × anime × future visual refresh; additive, no data migration */
+:root{--v4-ink:#090613;--v4-violet:#b968ff;--v4-pink:#ff74d6;--v4-blue:#76b7ff}
+body{background:radial-gradient(ellipse 65% 40% at 92% 0%,rgba(129,49,203,.22),transparent 75%),radial-gradient(ellipse 50% 40% at 0% 55%,rgba(38,81,153,.12),transparent 80%),#090613!important}
+#hub .page{max-width:1440px;margin-inline:auto}
+#hub .hub-banner{position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(204,149,255,.45)!important;border-radius:30px!important;box-shadow:0 24px 70px rgba(7,0,24,.65),inset 0 1px rgba(255,255,255,.13)!important;background:linear-gradient(105deg,rgba(14,7,32,.93) 0%,rgba(35,12,70,.86) 55%,rgba(58,17,95,.55) 100%),url('bethan.png') right center/auto 100% no-repeat!important}
+#hub .hub-banner:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 80% 30%,rgba(204,106,255,.22),transparent 38%),linear-gradient(0deg,rgba(8,4,20,.45),transparent 55%)}
+#hub .luxe-hero-eyebrow,#hub .section-kicker{color:#e2baff!important;letter-spacing:.18em!important;font-weight:800!important}
+#hub .hub-banner h1{font-family:Georgia,serif!important;font-size:clamp(38px,5.3vw,78px)!important;line-height:1.05!important;letter-spacing:-.045em!important;text-shadow:0 4px 22px #140624}
+#hub .hub-banner h1 em{background:linear-gradient(90deg,#f5d3ff,#be80ff,#8fd8ff);background-clip:text;-webkit-background-clip:text;color:transparent}
+#hub .hub-banner p{max-width:530px!important;color:#eee0ff!important;font-size:clamp(15px,1.5vw,19px)!important;line-height:1.7!important}
+#hub .quick-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;margin:24px 0!important}
+#hub .quick-action{min-height:112px!important;border-radius:22px!important;background:linear-gradient(125deg,rgba(52,24,84,.94),rgba(17,11,36,.94))!important;border:1px solid rgba(194,130,255,.34)!important;box-shadow:0 10px 28px rgba(0,0,0,.25)!important;transition:transform .2s,border-color .2s,box-shadow .2s}
+#hub .quick-action:hover{transform:translateY(-3px);border-color:#d29aff!important;box-shadow:0 15px 35px rgba(143,67,231,.25)!important}
+#hub .quick-icon{display:grid;place-items:center;min-width:50px;min-height:50px;border-radius:15px;background:linear-gradient(145deg,#853cdd,#3d246b);color:white!important}
+#hub .luxe-featured{margin-top:24px!important}
+#hub .luxe-featured h2{font-family:Georgia,serif!important;font-size:clamp(28px,3vw,42px)!important}
+#hub .development-notice{border-radius:15px!important;opacity:.85}
+#chat .chat-head{border-radius:22px!important;background:linear-gradient(115deg,rgba(59,25,90,.85),rgba(22,12,40,.92))!important;border:1px solid rgba(193,131,255,.4)!important}
+#chat .chatlog{border-radius:20px!important;background:linear-gradient(180deg,rgba(19,11,35,.94),rgba(10,7,22,.96))!important;border:1px solid rgba(169,103,238,.23)!important}
+#chat #chatForm{border-radius:19px!important;border:1px solid rgba(203,151,255,.35)!important;background:rgba(25,13,44,.97)!important;box-shadow:0 9px 34px rgba(0,0,0,.4)!important}
+#chat .luxe-chat-kicker{color:#dbaaff!important}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #b977ff!important;outline-offset:2px}
+@media(max-width:700px){
+ #hub .page{padding-inline:12px!important}
+ #hub .hub-banner{min-height:420px!important;border-radius:23px!important;background:linear-gradient(90deg,rgba(12,7,29,.95),rgba(23,10,49,.83) 68%,rgba(20,8,45,.45)),url('bethan.png') right bottom/auto 72% no-repeat!important}
+ #hub .hub-banner .luxe-hero-overlay{padding:26px 19px!important}
+ #hub .hub-banner h1{font-size:clamp(36px,10vw,52px)!important;max-width:90%!important}
+ #hub .hub-banner p{font-size:15px!important;max-width:85%!important}
+ #hub .quick-actions{grid-template-columns:1fr!important;gap:10px!important;margin:15px 0!important}
+ #hub .quick-action{min-height:83px!important;padding:12px!important;border-radius:17px!important}
+ #hub .quick-icon{min-width:42px;min-height:42px}
+ #chat .chat-layout{padding-inline:10px!important;max-width:100%!important}
+ #chat .chat-head{padding:12px!important;gap:10px!important}
+ #chat .chat-head h1,#chat .chat-head h2{font-size:clamp(20px,5vw,27px)!important}
+ #chat .chatlog{min-height:42dvh!important;padding:12px!important}
+ #chat #chatInput{font-size:16px!important;min-height:54px!important}
+ #chat #chatForm{margin-bottom:12px!important}
+ #chat .l5-chat-actions{display:flex!important;flex-wrap:wrap!important;gap:6px!important}
+ #chat .l5-chat-actions button{padding:9px!important;font-size:12px!important}
+}
+@media(prefers-reduced-motion:reduce){#hub .quick-action{transition:none!important}}
+</style>
+</head><body class="on-welcome"><div id="l53Intro" role="dialog" aria-label="Welcome to Riley’s Fantasy AI" aria-modal="true">
   <div class="intro-film-bg" aria-hidden="true"></div><div class="intro-film-stars" aria-hidden="true"></div>
   <div class="intro-film-shade" aria-hidden="true"></div>
   <div class="intro-film-scene scene-one"><span class="intro-kicker">A NEW UNIVERSE AWAITS</span><h1>Welcome to<br><em>Riley's Fantasy AI</em></h1><p>Where your imagination becomes the story.</p></div>
